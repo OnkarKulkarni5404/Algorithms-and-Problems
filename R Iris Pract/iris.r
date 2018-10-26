@@ -27,3 +27,4 @@ for(i in 1:(ncol(data)-1))
 
 #plotting histograms
 hist(data$petal_length)
+boxplot(data)
