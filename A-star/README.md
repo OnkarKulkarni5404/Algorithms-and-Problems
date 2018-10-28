@@ -3,6 +3,8 @@
 ### Applications of A-star Algorithm
 - Used in calculating shortest paths for movement of characters in games, hence Game Programming industry is the biggest industry to use this algorithm. As this is successful with obstacles as well. 
 
+### Program Reference from https://www.hackerearth.com/practice/notes/a-search-algorithm/
+
 {
 
      //A* algorithm implementation using the method design pattern.
