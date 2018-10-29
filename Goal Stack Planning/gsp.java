@@ -55,11 +55,16 @@ public class GSP {
     //goal=ontable(a)^on(b,a)^on(c,b)^on(d,c)^clear(d)^armempty
     void stack(int a,int b)
     {
+            if(position[a][b]==1)
+                return;
+        
             if(clear[b]!=1)
                 clearthis(b);
             if(clear[a]!=1)
                 clearthis(a);
-         
+         char c=(char) ((char)a+97);
+         char d=(char) ((char)b+97);
+         System.out.println("Stack("+c+","+d+")");
             position[a][b]=1;
             clear[b]=0;
             clear[a]=1;
@@ -84,6 +89,7 @@ public class GSP {
     void clearthis(int a)
     {
             //see whos up
+            //System.out.println("Clear called for"+(char)((char)a+97));
             int up=0;
             for(int i=0;i<clear.length;i++)
                 if(position[i][a]==1){
@@ -97,20 +103,32 @@ public class GSP {
     {
         if(!isclear(a))
             clearthis(a);
+        
+        char c=(char) ((char)a+97);
+        char d=(char) ((char)b+97);
+        System.out.println("Unstack("+c+","+d+")");
         ontable[a]=1;
         position[a][b]=0;
         clear[a]=1;
         clear[b]=1;
     }
     void putontable(int a){
-    
+        
+        if(ontable[a]==1)
+            return;
+        
         if(!isclear(a))
             clearthis(a);
         
         if(somethingisdown(a)!=999){
+            
             clear[somethingisdown(a)]=1;
+            char c=(char) ((char)a+97);
+            char d=(char) ((char)somethingisdown(a)+97);
+            System.out.println("Unstack("+c+","+d+")");
             position[a][somethingisdown(a)]=0;
             ontable[a]=1;
+            
         }
        
     }
@@ -165,10 +183,15 @@ public class GSP {
     
     public static void main(String Args[]){
     
-    String s="ontable(b)^ontable(d)^on(a,b)^on(c,d)^clear(a)^clear(c)";
-    String g="ontable(d)^on(b,d)^on(a,b)^on(c,a)";
+    String s1="ontable(a)^on(b,a)^ontable(c)^ontable(d)^clear(b)^clear(c)^clear(d)";
+    String g1="ontable(a)^ontable(d)^on(c,a)^on(b,d)";
+    //String s="ontable(b)^ontable(d)^on(a,b)^on(c,d)^clear(a)^clear(c)";
+    //String g="ontable(d)^on(b,d)^on(a,b)^on(c,a)";
+    //String s2="ontable(a)^ontable(d)^on(c,a)^on(b,d)^clear(c)^clear(b)";
+    //String g2="ontable(d)^ontable(c)^on(b,d)^on(a,b)";
+    
     GSP go=new GSP(4);
-    go.splitme(s, g);
+    go.splitme(s1, g1);
     go.fillvar();
     go.display();
     System.out.println("\n\n");
